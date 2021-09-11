@@ -1,0 +1,213 @@
+//
+// Scaffolding
+// --------------------------------------------------
+// Reset the box-sizing
+
+// Reset fonts for relevant elements
+input,
+button,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+
+// Links
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+
+// Figures
+//
+// We reset this here because previously Normalize had no `figure` margins. This
+// ensures we don't break anyone's use of the element.
+
+figure {
+    margin: 0;
+}
+
+// Responsive images (ensure images don't scale beyond their parents)
+.img-responsive {
+    @include img-responsive;
+}
+
+// Rounded corners
+.img-rounded {
+    border-radius: $border-radius-large;
+}
+
+// Image thumbnails
+.img-thumbnail {
+    line-height: $line-height-base;
+    @include transition(all .2s ease-in-out);
+    // Keep them at most 100% wide
+    @include img-responsive(inline-block);
+}
+
+// Perfect circle
+.img-circle {
+    border-radius: 50%; // set radius in percents
+}
+
+
+// Horizontal rules
+
+hr {
+    border: 0;
+    margin: 25px 0px;
+    border-top: 1px solid $hr-border;
+}
+
+
+// Only display content to screen readers
+//
+// See: http://a11yproject.com/posts/how-to-hide-content
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+// Use in conjunction with .sr-only to only display content when it's focused.
+// Useful for "Skip to main content" links; see http://www.w3.org/TR/2013/NOTE-WCAG20-TECHS-20130905/G1
+// Credit: HTML5 Boilerplate
+
+.sr-only-focusable {
+    &:active,
+    &:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+    }
+}
+
+
+// iOS "clickable elements" fix for role="button"
+//
+// Fixes "clickability" issue (and more generally, the firing of events such as focus as well)
+// for traditionally non-focusable elements with role="button"
+// see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+[role="button"] {
+    cursor: pointer;
+}
+
+.page-title,
+.block-title {
+    display: block;
+    position: relative;
+    margin-bottom: 15px;
+
+    .text-title {
+        position: relative;
+    }
+}
+
+.box-title {
+    margin-bottom: 15px;
+
+    > h2,h3,h4 {
+        font-size: 18px;
+    }
+}
+
+.border-line-top {
+    display: block;
+    padding: 30px 0px 25px;
+    border-top: 1px solid rgba($white, 0.25);
+    position: relative;
+
+    &:before {
+        content: '';
+        width: 25%;
+        height: 1px;
+        background: rgba($yellow, 0.45);
+        position: absolute;
+        top: -1px;
+        left: 0px;
+    }
+}
+
+.data-table-list {
+    width: 100%;
+    height: 100%;
+}
+
+.rows {
+    width: 100%;
+    display: table;
+
+    .col {
+        padding: 10px;
+        display: table-cell;
+    }
+}
+
+.news-post {
+    color: $gray;
+    display: block;
+}
+
+.block-bg-frame {
+    display: block;
+    padding: 20px;
+    background-color: $white;
+    @include border-radius(4px);
+}
+
+.block-description,
+.description {
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: $link-hover-color !important;
+        }
+    }
+}
+
+// 768 - 1023
+@include bpminmax($screen-sm-min, $screen-sm-max) {
+    .block-title {
+        margin-bottom: 25px;
+
+        .text-title {
+            font-size: 18px;
+        }
+    }
+}
+
+// 767
+@include bp('max-width', $screen-xs-max) {
+    .block-title {
+        margin-bottom: 10px;
+
+        .text-title {
+            font-size: 16px;
+        }
+
+    }
+}

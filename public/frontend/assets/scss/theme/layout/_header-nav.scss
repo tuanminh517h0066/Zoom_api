@@ -1,0 +1,140 @@
+/* menu */
+#menu {
+    margin: 20px 0px;
+}
+
+.navbar-nav {
+    > li {
+        > a {
+            color: $gray-base;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            @include transition(all 0.2s ease);
+            @include border-radius(4px);
+            overflow: hidden;
+            display: block;
+        }
+
+        a:hover,
+        &.open > a,
+        &.active > a {
+            color: $white;
+            background: $green;
+        }
+    }
+}
+
+// 1023
+@include bp('max-width', $screen-sm-max) {
+    #menu {
+        margin: 10px 0px;
+
+        .dropdown-menu {
+            background-color: transparent !important;
+        }
+
+        .dropdown-inner {
+            .list-unstyled {
+                li {
+                    padding: 0px 35px;
+                }
+            }
+
+            a {
+                color: $gray-base;
+                display: block;
+            }
+        }
+    }
+
+    .navbar-nav > li {
+        border-bottom: 1px solid $gray-lighter;
+
+        &.dropdown {
+            &:after {
+                content: '\f105';
+                font-size: 20px;
+                font-family: $icon-icomoom-name;
+                position: absolute;
+                top: 7px;
+                right: 15px;
+            }
+        }
+        &.dropdown.open:after {
+            color: $white;
+        }
+
+        > a {
+            @include border-radius(0);
+        }
+    }
+
+
+    #menu div.dropdown-inner > ul.list-unstyled {
+        display: block;
+    }
+    #menu div.dropdown-menu {
+        margin-left: 0 !important;
+        padding-bottom: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    #menu .dropdown-inner {
+        display: block;
+    }
+    #menu .dropdown-menu a:hover,
+    #menu .dropdown-menu ul li a:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    #menu .see-all {
+        margin-top: 0;
+        border: none;
+        border-radius: 0;
+        color: #fff;
+    }
+}
+
+// 1024
+@include bp('min-width', $screen-md-min) {
+    .navbar-nav {
+        > li {
+            & + li {
+                margin-left: 2px;
+            }
+        }
+    }
+
+    .navbar-nav {
+        .dropdown-menu {
+            min-width: 180px;
+            background: $green;
+            @include border-radius(4px 0px 4px 4px);
+            overflow: hidden;
+            border: none;
+
+            .dropdown-inner {
+                width: 100%;
+
+                a {
+                    color: $white;
+                    padding: 10px 20px;
+                    text-transform: none;
+                    display: block;
+                }
+            }
+        }
+
+        .dropdown:hover {
+            > a {
+                color: $white;
+                background: $green;
+                @include border-radius(4px 4px 0px 0px);
+            }
+
+            .dropdown-menu {
+                display: block;
+            }
+        }
+    }
+}

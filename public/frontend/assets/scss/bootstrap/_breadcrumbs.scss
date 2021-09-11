@@ -1,0 +1,38 @@
+.breadcrumb {
+    list-style: none;
+    padding: $breadcrumb-padding-vertical 0px;
+    background-color: transparent;
+    display: block;
+
+    li {
+        display: inline-block;
+
+        & + li:before {
+            $nbsp: "\00a0";
+            content: "#{$breadcrumb-separator}#{$nbsp}";
+            color: $breadcrumb-color;
+            padding: 0px 5px;
+        }
+
+        a {
+            color: $gray;
+
+            &:hover {
+                color: $link-hover-color;
+            }
+        }
+    }
+
+    > .active {
+        color: $breadcrumb-active-color;
+    }
+}
+
+// 767
+@include bp('max-width', $screen-xs-max) {
+    .breadcrumb {
+        ul {
+            padding: 0px 15px;
+        }
+    }
+}

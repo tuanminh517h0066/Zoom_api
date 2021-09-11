@@ -1,0 +1,540 @@
+//
+// Typography
+// --------------------------------------------------
+
+
+// Headings
+// -------------------------
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  color: $headings-color;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  text-transform: none;
+
+  small,
+  .small {
+    font-weight: normal;
+    line-height: 1;
+  }
+}
+
+h1, .h1 { font-size: $font-size-h1; }
+h2, .h2 { font-size: $font-size-h2; }
+h3, .h3 { font-size: $font-size-h3; }
+h4, .h4 { font-size: $font-size-h4; }
+h5, .h5 { font-size: $font-size-h5; }
+h6, .h6 { font-size: $font-size-h6; }
+
+
+// Body text
+// -------------------------
+
+p {
+  margin-bottom: 15px;
+}
+
+.lead {
+  margin-bottom: $line-height-computed;
+  font-size: floor(($font-size-base * 1.15));
+  font-weight: 300;
+  line-height: 1.4;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: ($font-size-base * 1.5);
+  }
+}
+
+
+// Emphasis & misc
+// -------------------------
+
+// Ex: (12px small font / 14px base font) * 100% = about 85%
+small,
+.small {
+  font-size: floor((100% * $font-size-small / $font-size-base));
+}
+
+mark,
+.mark {
+  background-color: $state-warning-bg;
+  padding: .2em;
+}
+
+// Alignment
+.text-left           { text-align: left; }
+.text-right          { text-align: right; }
+.text-center         { text-align: center; }
+.text-justify        { text-align: justify; }
+.text-nowrap         { white-space: nowrap; }
+
+// Transformation
+.text-lowercase      { text-transform: lowercase; }
+.text-uppercase      { text-transform: uppercase; }
+.text-capitalize     { text-transform: capitalize; }
+
+// Contextual colors
+.text-muted {
+  color: $text-muted;
+}
+
+@include text-emphasis-variant('.text-primary', $brand-primary);
+
+@include text-emphasis-variant('.text-success', $state-success-text);
+
+@include text-emphasis-variant('.text-info', $state-info-text);
+
+@include text-emphasis-variant('.text-warning', $state-warning-text);
+
+@include text-emphasis-variant('.text-danger', $state-danger-text);
+
+// Contextual backgrounds
+// For now we'll leave these alongside the text classes until v4 when we can
+// safely shift things around (per SemVer rules).
+.bg-primary {
+  // Given the contrast here, this is the only class to have its color inverted
+  // automatically.
+  color: #fff;
+}
+@include bg-variant('.bg-primary', $brand-primary);
+
+@include bg-variant('.bg-success', $state-success-bg);
+
+@include bg-variant('.bg-info', $state-info-bg);
+
+@include bg-variant('.bg-warning', $state-warning-bg);
+
+@include bg-variant('.bg-danger', $state-danger-bg);
+
+
+// Lists
+// -------------------------
+
+// Unordered and Ordered lists
+ul,
+ol {
+  margin: 0;
+  list-style: none;
+}
+
+// List options
+
+// [converter] extracted from `.list-unstyled` for libsass compatibility
+@mixin list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+// [converter] extracted as `@mixin list-unstyled` for libsass compatibility
+.list-unstyled {
+  @include list-unstyled;
+
+  li {
+    display: block;
+
+    a {
+      display: inline-block;
+      padding: 5px 0px;
+
+      &:hover {
+        color: $link-hover-color;
+      }
+    }
+  }
+}
+
+
+// Inline turns list items into inline-block
+.list-inline {
+  @include list-unstyled;
+  margin-left: -5px;
+
+  > li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+// Description Lists
+dl {
+  margin-top: 0; // Remove browser default
+  margin-bottom: $line-height-computed;
+}
+dt,
+dd {
+  line-height: $line-height-base;
+}
+dt {
+  font-weight: bold;
+}
+dd {
+  margin-left: 0; // Undo browser default
+}
+
+// Horizontal description lists
+//
+// Defaults to being stacked without any of the below styles applied, until the
+// grid breakpoint is reached (default of ~768px).
+
+.dl-horizontal {
+  dd {
+    @include clearfix; // Clear the floated `dt` if an empty `dd` is present
+  }
+
+  @media (min-width: $dl-horizontal-breakpoint) {
+    dt {
+      float: left;
+      width: ($dl-horizontal-offset - 20);
+      clear: left;
+      text-align: right;
+      @include text-overflow;
+    }
+    dd {
+      margin-left: $dl-horizontal-offset;
+    }
+  }
+}
+
+
+// Misc
+// -------------------------
+
+// Abbreviations and acronyms
+abbr[title],
+// Add data-* attribute to help out our tooltip plugin, per https://github.com/twbs/bootstrap/issues/5257
+abbr[data-original-title] {
+  cursor: help;
+  border-bottom: 1px dotted $abbr-border-color;
+}
+.initialism {
+  font-size: 90%;
+  @extend .text-uppercase;
+}
+
+// Blockquotes
+blockquote {
+  padding: ($line-height-computed / 2) $line-height-computed;
+  margin: 0 0 $line-height-computed;
+  font-size: $blockquote-font-size;
+  border-left: 5px solid $blockquote-border-color;
+
+  p,
+  ul,
+  ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Note: Deprecated small and .small as of v3.1.0
+  // Context: https://github.com/twbs/bootstrap/issues/11660
+  footer,
+  small,
+  .small {
+    display: block;
+    font-size: 80%; // back to default font-size
+    line-height: $line-height-base;
+    color: $blockquote-small-color;
+
+    &:before {
+      content: '\2014 \00A0'; // em dash, nbsp
+    }
+  }
+}
+
+// Opposite alignment of blockquote
+//
+// Heads up: `blockquote.pull-right` has been deprecated as of v3.1.0.
+.blockquote-reverse,
+blockquote.pull-right {
+  padding-right: 15px;
+  padding-left: 0;
+  border-right: 5px solid $blockquote-border-color;
+  border-left: 0;
+  text-align: right;
+
+  // Account for citation
+  footer,
+  small,
+  .small {
+    &:before { content: ''; }
+    &:after {
+      content: '\00A0 \2014'; // nbsp, em dash
+    }
+  }
+}
+
+// Addresses
+address {
+  margin-bottom: $line-height-computed;
+  font-style: normal;
+  line-height: $line-height-base;
+}
+
+.main-wrappers {
+  width: 100%;
+  min-height: calc(100vh - 150px);
+  position: relative;
+
+  @include bp('max-width', '767px') {
+    min-height: 100%;
+    height: 100%;
+  }
+
+  #content-page {
+    display: block;
+    min-height: 560px;
+    padding-bottom: 45px;
+    @include clearfix;
+
+    .column_left,
+    .column_right,
+    .column_main {
+      display: block;
+    }
+  }
+}
+
+.text-link {
+  color: $red;
+  font-weight: bold;
+}
+
+.buttons-set {
+  display: block;
+
+  &.bottom-middle {
+    margin-top: 55px;
+    margin-bottom: 55px;
+  }
+
+  > .btn {
+    & + .btn {
+      margin-left: 15px;
+    }
+  }
+}
+
+.label_stick {
+  margin: 0px;
+  padding: 0px 15px;
+  line-height: 38px;
+  background: $white;
+  position: absolute;
+  display: block;
+  z-index: 2;
+  left: 0px;
+  top: 15px;
+
+  &:after,
+  &:before {
+    content: '';
+    width: 0px;
+    height: 0px;
+    display: block;
+    border-right: 14px solid transparent;
+    position: absolute;
+    right: -14px;
+  }
+
+  &:before {
+    top: 0px;
+    border-top: 18px solid $white;
+  }
+  &:after {
+    bottom: 0px;
+    border-bottom: 18px solid $white;
+  }
+}
+
+.user-loved {
+  height: 36px;
+  min-width: 150px;
+  display: block;
+  position: relative;
+  float: left;
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    border: 2px solid $white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    &:nth-of-type(2) {
+      left: 26px;
+      z-index: 1;
+    }
+    &:nth-of-type(3) {
+      left: 50px;
+      z-index: 2;
+    }
+    &:nth-of-type(4) {
+      left: 76px;
+      z-index: 3;
+    }
+    &:nth-of-type(5) {
+      left: 100px;
+      z-index: 4;
+    }
+  }
+}
+
+// Share Action
+.blog-action-bottom {
+  display: block;
+  padding: 15px 0px;
+  border-top: 1px solid $border-color;
+  @include clearfix;
+
+  [class^="icon-"] {
+    color: $gray-base;
+    font-size: 22px;
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  .btn-link {
+    color: $gray;
+    display: block;
+    padding-left: 30px;
+    position: relative;
+    @include clearfix;
+
+    &:hover {
+      > [class^="icon-"] {
+        color: $link-hover-color;
+      }
+    }
+  }
+
+  .btn-wish-list {
+    > [class^="icon-"] {
+      font-size: 24px;
+      top: -3px;
+    }
+  }
+}
+
+.video-frame {
+  display: block;
+  padding-top: 57%;
+  position: relative;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+}
+
+.btn-more-view {
+  color: $red;
+
+  .fa {
+    font-weight: normal;
+  }
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+// 768 - 1199
+@include bpminmax($screen-sm-min, $screen-lg-max) {
+  .main-wrappers {
+    > .container > .row {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+}
+
+// 1023
+@include bp('max-width', $screen-sm-max) {
+  .main-wrappers #content-page .column_main {
+    margin-bottom: 15px;
+  }
+}
+
+// 768 - 1023
+@include bpminmax($screen-sm-min, $screen-sm-max) {
+  .text-link {
+    font-size: 14px;
+    &:hover {
+      color: $yellow;
+    }
+  }
+}
+
+// 767
+@include bp('max-width', $screen-xs-max) {
+  h1, .h1 { font-size: 18px; }
+  h2, .h2 { font-size: 18px; }
+  h3, .h3 { font-size: 16px; }
+  h4, .h4 { font-size: 14px; }
+  h5, .h5 { font-size: $font-size-h5; }
+  h6, .h6 { font-size: $font-size-h6; }
+
+  .text-link {
+    font-size: 13px;
+    &:hover {
+      color: $yellow;
+    }
+  }
+
+  .main-wrappers #content-page {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+// 767
+@include bp('max-width', $screen-xs-max) {
+  .description,
+  .block-description {
+    iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 165px;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+// 768
+@include bp('min-width', $screen-sm-min) {
+  .show-mobile {
+    display: none !important;
+  }
+}
+
+// 1200
+@include bp('min-width', $screen-lg-min) {
+  .main-wrappers {
+    padding-left: 125px;
+
+    > .container > .row {
+      margin-left: 0px;
+      margin-right: 0px;
+    }
+  }
+}
+
+// 1440
+@include bp('min-width', '1440px') {
+  .main-wrappers {
+    padding-left: 115px;
+  }
+}

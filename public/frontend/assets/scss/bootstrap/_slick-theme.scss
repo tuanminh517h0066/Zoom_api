@@ -1,0 +1,126 @@
+// Default Variables
+$slick-font-path: "../fonts/" !default;
+$slick-font-family: "Glyphicons Halflings" !default;
+$slick-loader-path: "../" !default;
+$slick-arrow-color: $white !default;
+$slick-dot-color: $gray !default;
+$slick-dot-color-active: $red !default;
+$slick-prev-character: "\e257" !default;
+$slick-next-character: "\e258" !default;
+$slick-dot-character: "\2022" !default;
+$slick-dot-size: 6px !default;
+$slick-opacity-default: 0.75 !default;
+$slick-opacity-on-hover: 1 !default;
+$slick-opacity-not-active: 0.25 !default;
+
+/* Slider */
+.slick-list {
+    .slick-loading & {
+        background: #fff url("../images/ajax-loader.gif") no-repeat center center;
+    }
+}
+
+/* Arrows */
+
+.slick-prev,
+.slick-next {
+    display: table;
+    height: 40px;
+    width: 40px;
+    line-height: 0px;
+    font-size: 0px;
+    color: $green;
+    background: transparent;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 50%;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+
+    &:hover {
+        color: $blue;
+        opacity: $slick-opacity-on-hover;
+    }
+
+    &.slick-disabled {
+        opacity: $slick-opacity-not-active;
+    }
+
+    &:before {
+        font-size: 40px;
+        font-family: $slick-font-family;
+        opacity: $slick-opacity-default;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+.slick-prev {
+    left: -45px;
+
+    &:before {
+        content: $slick-prev-character;
+    }
+}
+
+.slick-next {
+    right: -45px;
+
+    &:before {
+        content: $slick-next-character;
+    }
+}
+
+/* Dots */
+.slick-dotted.slick-slider {
+    margin-bottom: 30px;
+}
+
+.slick-dots {
+    height: 12px;
+    margin: 0;
+    display: block;
+    text-align: center;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+    //@include abs-pos(auto, auto, 20px, 50%);
+    //@include clearfix;
+
+    li {
+        display: block;
+        height: 10px;
+        width: 10px;
+        margin: 0 5px;
+        padding: 0;
+        cursor: pointer;
+        position: relative;
+        float: left;
+
+        button {
+            border: 0;
+            background: $slick-dot-color;
+            @include border-radius(50%);
+            display: block;
+            height: 10px;
+            width: 10px;
+            outline: none;
+            line-height: 0px;
+            font-size: 0px;
+            color: transparent;
+            position: relative;
+            padding: 0px;
+            cursor: pointer;
+        }
+
+        &.slick-active button {
+            background: $slick-dot-color-active;
+        }
+    }
+}

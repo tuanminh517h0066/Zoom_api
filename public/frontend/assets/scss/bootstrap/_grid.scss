@@ -1,0 +1,118 @@
+//
+// Grid system
+// --------------------------------------------------
+
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+.container {
+  max-width: 100%;
+  @include container-fixed;
+
+  // 1023
+  @include bp('max-width', $screen-md-max) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  // 1200
+  @include bp('min-width', $screen-lg-min) {
+    max-width: 1200px;
+  }
+
+  // 1440
+  @include bp('min-width', '1440px') {
+    max-width: $container-lg;
+  }
+}
+
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+
+.container-fluid {
+  @include container-fixed;
+}
+
+
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+.row {
+  @include make-row;
+
+  @include bp('max-width', $screen-md-max) {
+    margin-left: -10px;
+    margin-right: -10px;
+
+    > div[class^="col-"] {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+@include make-grid-columns;
+
+
+// Extra small grid
+//
+// Columns, offsets, pushes, and pulls for extra small devices like
+// smartphones.
+
+@include make-grid(xs);
+
+
+// Small grid
+//
+// Columns, offsets, pushes, and pulls for the small device range, from phones
+// to tablets.
+// 768
+@include bp('min-width', $screen-sm-min) {
+  @include make-grid(sm);
+}
+
+
+// Medium grid
+// 1024
+@include bp('min-width', $screen-md-min) {
+  @include make-grid(md);
+
+  div.column_left,
+  div.column_right {
+    width: percentage(420px / $container-large-desktop);
+  }
+
+  div.column_left {
+    float: left;
+  }
+
+  div.column_right {
+    float: right;
+  }
+
+  div.column_main {
+    width: percentage(830px / $container-large-desktop);
+    float: left;
+  }
+
+  div.column_left + .column_main {
+    float: right;
+  }
+}
+
+// Large grid
+// 1200
+@include bp('min-width', $screen-lg-min) {
+  @include make-grid(lg);
+}

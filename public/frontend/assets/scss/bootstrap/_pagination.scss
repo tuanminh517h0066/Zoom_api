@@ -1,0 +1,100 @@
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 20px 0px;
+    @include clearfix;
+
+    > li {
+        display: block;
+        margin: 0px 5px 10px;
+        float: left;
+
+        > a,
+        > span {
+            width: 40px;
+            height: 40px;
+            padding: 0px;
+            line-height: 38px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: $pagination-color;
+            background-color: $pagination-bg;
+            border: 1px solid $pagination-border;
+            @include border-radius(50%);
+            display: block;
+            position: relative;
+        }
+    }
+
+    > li > a,
+    > li > span {
+        &:hover {
+            z-index: 2;
+            color: $pagination-hover-color;
+            background-color: $pagination-active-bg;
+            border-color: $pagination-hover-border;
+        }
+    }
+
+    > .active > a,
+    > .active > span {
+        &,
+        &:hover {
+            z-index: 3;
+            color: $pagination-active-color;
+            background-color: $pagination-active-bg;
+            border-color: $pagination-active-border;
+            cursor: default;
+        }
+    }
+
+    > .disabled {
+        > span,
+        > span:hover,
+        > a,
+        > a:hover {
+            color: $pagination-disabled-color;
+            background-color: $pagination-disabled-bg;
+            border-color: $pagination-disabled-border;
+            cursor: $cursor-disabled;
+        }
+    }
+}
+
+// Sizing
+// --------------------------------------------------
+
+// Large
+.pagination-lg {
+    @include pagination-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+}
+
+// Small
+.pagination-sm {
+    @include pagination-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+}
+
+@include bp('max-width', $screen-xs-max) {
+    div.pagination {
+        text-align: center;
+        display: block;
+
+        > .pagination {
+            margin: 0px;
+        }
+    }
+    .pagination>li {
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    .pagination>li>a,
+    .pagination>li>span {
+        width: 30px;
+        height: 30px;
+        line-height: 28px;
+    }
+}

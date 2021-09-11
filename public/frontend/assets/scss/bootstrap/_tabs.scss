@@ -1,0 +1,1 @@
+// Tabbable tabs// -------------------------.tab-content {    display: block;    @include clearfix;    div.tab-pane {        display: none;        visibility: hidden;        @include opacity(0);        &.active,        &.selected {            display: block;            visibility: visible;            @include opacity(1);        }    }}

@@ -1,0 +1,123 @@
+footer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #5a5a5a;
+    position: relative;
+    z-index: 1;
+
+    .container {
+        > .row {
+            color: $white;
+        }
+    }
+
+    .copyright {
+        line-height: 30px;
+    }
+}
+
+.block-social {
+    .social {
+        display: block;
+        float: right;
+
+        > li {
+            display: block;
+            float: left;
+
+            & + li {
+                margin-left: 15px;
+            }
+
+            a {
+                color: $white;
+                font-size: 20px;
+                padding: 0px 5px;
+                font-weight: bold;
+                display: block;
+            }
+        }
+    }
+}
+
+.block-static-event {
+    width: 100%;
+    @include transition(all 0.3s ease-in-out);
+    position: relative;
+    z-index: 2;
+    bottom: 0px;
+    left: 0px;
+
+    .btn {
+        width: 100%;
+        @include border-radius(0);
+    }
+}
+
+#backToTop {
+    width: 40px;
+    height: 40px;
+    @include opacity(0);
+    text-align: center;
+    margin-bottom: 0px;
+    position: fixed;
+    right: 15px;
+    bottom: 55px;
+    z-index: 9;
+
+    @include bp('max-width', '767px') {
+        bottom: 110px;
+    }
+
+    > a {
+        color: $white;
+        font-size: 24px;
+        width: 100%;
+        display: table;
+        background-color: $gray;
+        @include border-radius(50%);
+
+        span {
+            width: 40px;
+            height: 40px;
+            display: table-cell;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background-color: $red;
+        }
+    }
+}
+
+
+// 767
+@include bp('max-width', $screen-xs-max) {
+    footer {
+        .block-social {
+            text-align: center;
+
+            .social {
+                display: inline-block;
+                float: none;
+            }
+        }
+
+        .copyright {
+            text-align: center;
+        }
+    }
+}
+
+// 1200
+@include bp('min-width', $screen-lg-min) {
+
+}
+
+// 1440
+@include bp('min-width', '1440px') {
+    footer {
+        padding-left: 115px;
+    }
+}

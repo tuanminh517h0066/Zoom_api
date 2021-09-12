@@ -75,7 +75,7 @@ trait ZoomMeetingTrait
                 'settings'   => [
                     'host_video'        => true,
                     'participant_video' => true,
-                    'waiting_room'      => true,
+                    'waiting_room'      => false,
                     "join_before_host"  => true,
                 ],
             ]),

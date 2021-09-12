@@ -18,8 +18,8 @@ class MeetingController extends Controller
     const MEETING_TYPE_RECURRING = 3;
     const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
-    protected $api_key = '4GTcS0WnSYmBDoU9BtYnqQ';
-    protected $api_secret = 'sATMtQKbrbHng1z20mWb3lxkCutVsx5IymAT';
+    // protected $api_key = '4GTcS0WnSYmBDoU9BtYnqQ';
+    // protected $api_secret = 'sATMtQKbrbHng1z20mWb3lxkCutVsx5IymAT';
 
     public function list(Request $request)
     {
@@ -67,14 +67,17 @@ class MeetingController extends Controller
     {
         $zoom = Meeting::find($id);
         // dd($zoom);
+        $api_key = env('ZOOM_API_KEY');
+        $api_secret = env('ZOOM_API_SECRET');
+        // dd($api_key);
         $data = [
             'leaveUrl' => route('frontend.home'), 
             'meetingNumber' => $zoom->meeting_id, 
             'passWord' => $zoom->meeting_pwd, 
             'userName' => 'Larvel', 
-            'apiKey' => $this->api_key, 
+            'apiKey' => $api_key, 
             'role'  => 0,
-            'signature' => $this->generate_signature($this->api_key,$this->api_secret,$zoom->meeting_id,0), // chữ kỹ định danh cho meeting // Ở đây role có 3 kiểu 1: người chủ meeting , 0: người tham gia meeting , 5: người support cho người chủ meeting 
+            'signature' => $this->generate_signature($api_key,$api_secret,$zoom->meeting_id,0), // chữ kỹ định danh cho meeting // Ở đây role có 3 kiểu 1: người chủ meeting , 0: người tham gia meeting , 5: người support cho người chủ meeting 
 
         ];
         $data = json_encode($data);
